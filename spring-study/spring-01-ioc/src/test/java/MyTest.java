@@ -1,8 +1,7 @@
-import com.example.dao.UserDaoMysqlImpl;
-import com.example.dao.UserDaoOracleImpl;
-import com.example.dao.UserDaoSqlserverImpl;
 import com.example.service.UserService;
 import com.example.service.UserServiceImpl;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * @author <a href="mailto:liangzhengtao.lzt@lazada.com">liangzhengtao.lzt</a>
@@ -13,10 +12,18 @@ import com.example.service.UserServiceImpl;
 public class MyTest {
     public static void main(String[] args) {
 
-        //用户实际调用的是业务层，dao层不需要直接接触！
-        UserServiceImpl userService = new UserServiceImpl();
-        userService.setUserDao(new UserDaoSqlserverImpl());
+        //获取ApplicationContext：拿到Spring的容器
+        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 
-        userService.getUser();
+        //容器在手，天下我有，需要什么，就直接get什么！
+        UserServiceImpl userServiceImpl = (UserServiceImpl) context.getBean("UserServiceImpl");
+
+        userServiceImpl.getUser();
+
+//        //获取Spring的上下文对象！
+//        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+//        //我们的对象现在都在Spring中管理了，我们要使用，直接去里面取出来就可以了
+//        Hello hello = (Hello) context.getBean("hello");
+//        System.out.println(hello.toString());
     }
 }
