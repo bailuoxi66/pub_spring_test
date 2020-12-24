@@ -199,3 +199,39 @@ Ok！到了现在，我们彻底不用再去程序中改动去了，要实现不
 ```
 
 总结：在配置文件加载的时候，容器中管理的对象就已经初始化了
+
+# 5、Spring配置
+
+## 5.1 别名
+
+```xml
+<!--    别名，如果添加了别名，我们也可以使用别名获取到这个对象-->
+    <alias name="user" alias="userNew"/>
+```
+
+## 5.2 Bean的配置
+
+```java
+<!--
+    id: bean的唯一标示符，也就是相当于我们学的对象名
+    class：bean对象所对应的全限定名：包名+类型
+    name：也是别名,而且name 可以同时取多个别名,允许使用多种分隔符进行分割
+-->
+    <bean id="userT" class="com.example.pojo.UserT" name="user2,u2 u3;u4">
+        <property name="name" value="哈哈哈"/>
+    </bean>
+```
+
+## 5.3 import
+
+这个import，一般用于团队开发使用，他可以将多个配置文件，导入合并为一个
+
+假设，现在项目中有多个人开发，这三个人复制不同的类的开发，不同的类需要注册在不同的bean中，我们可以利用import将其合并
+
+```xml
+    <import resource="beans.xml"/>
+    <import resource="beans2.xml"/>
+    <import resource="beans3.xml"/>
+```
+
+总的是：applicationContext.xml

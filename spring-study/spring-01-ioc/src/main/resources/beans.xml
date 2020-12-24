@@ -29,8 +29,16 @@
         <constructor-arg name="name" value="小鱼"/>
     </bean>
 
-    <bean id="userT" class="com.example.pojo.UserT">
+<!--    别名，如果添加了别名，我们也可以使用别名获取到这个对象-->
+    <alias name="user" alias="userNew"/>
 
+<!--
+    id: bean的唯一标示符，也就是相当于我们学的对象名
+    class：bean对象所对应的全限定名：包名+类型
+    name：也是别名,而且name 可以同时取多个别名,允许使用多种分隔符进行分割
+-->
+    <bean id="userT" class="com.example.pojo.UserT" name="user2,u2 u3;u4;u5">
+        <property name="name" value="哈哈哈222"/>
     </bean>
 
 </beans>

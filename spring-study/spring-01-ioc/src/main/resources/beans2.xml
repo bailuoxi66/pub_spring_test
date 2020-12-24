@@ -37,8 +37,8 @@
     class：bean对象所对应的全限定名：包名+类型
     name：也是别名,而且name 可以同时取多个别名,允许使用多种分隔符进行分割
 -->
-    <bean id="userT" class="com.example.pojo.UserT" name="user2,u2 u3;u4;u5">
-        <property name="name" value="哈哈哈222"/>
+    <bean id="userT" class="com.example.pojo.UserT" name="user2,u2 u3;u4">
+        <property name="name" value="哈哈哈"/>
     </bean>
 
 </beans>
