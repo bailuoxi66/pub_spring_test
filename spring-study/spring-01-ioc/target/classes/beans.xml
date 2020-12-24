@@ -14,16 +14,23 @@
         <property name="userDao" ref="SqlserverImpl"/>
     </bean>
 
-<!--    使用Spring来创建对象，在Spring这些都称为Bean
-
-    类型 变量名= new 类型();
-    Hello hello = new Hello();
-    id = 变量名
-    class = 类型
-    property 相当于给对象中的属性设置一个值！
-    -->
-
-<!--    <bean id="hello" class="com.example.pojo.Hello">-->
-<!--        <property name="str" value="Spring"/>-->
+<!--    使用下标-->
+<!--    <bean id="user" class="com.example.pojo.User">-->
+<!--        <constructor-arg index="0" value="小白和小鱼"/>-->
 <!--    </bean>-->
+
+<!--    使用类型-->
+<!--    <bean id="user" class="com.example.pojo.User">-->
+<!--        <constructor-arg type="java.lang.String" value="小白"/>-->
+<!--    </bean>-->
+
+<!--    使用参数名-->
+    <bean id="user" class="com.example.pojo.User">
+        <constructor-arg name="name" value="小鱼"/>
+    </bean>
+
+    <bean id="userT" class="com.example.pojo.UserT">
+
+    </bean>
+
 </beans>

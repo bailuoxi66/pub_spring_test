@@ -87,8 +87,18 @@ GitHub:https://github.com/spring-projects/spring-framework
     //利用set进行动态实现值的注入；
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
-    }
+ 		}
 ```
+
+```java
+				//用户实际调用的是业务层，dao层不需要直接接触！
+        UserServiceImpl userService = new UserServiceImpl();
+        userService.setUserDao(new UserDaoSqlserverImpl());
+
+        userService.getUser();
+```
+
+
 
 <img src="/Users/liangzhengtao/Library/Application Support/typora-user-images/image-20201221105934393.png" style="zoom:50%;" />
 
@@ -107,7 +117,7 @@ GitHub:https://github.com/spring-projects/spring-framework
 
 **控制反转是一种通过描述（XML或注解）并通过第三方去生产或获取特定对象的方式。在Spring中实现控制反转的是IoC容器，其实现方法是依赖注入（Dependency Injection,DI）**
 
-## 2.2 HelloSpring
+# 3、HelloSpring
 
 思考问题？
 
@@ -158,3 +168,34 @@ Ok！到了现在，我们彻底不用再去程序中改动去了，要实现不
     </bean>
 ```
 
+# 4、IOC创建对象的方式
+
+1、使用无参构造创建对象，默认！
+
+2、假设我们使用有参构造创建对象
+
+- 下标赋值
+
+```java
+    <bean id="user" class="com.example.pojo.User">
+        <constructor-arg index="0" value="小白和小鱼"/>
+    </bean>
+```
+
+- 类型(不建议使用)
+
+```java
+    <bean id="user" class="com.example.pojo.User">
+        <constructor-arg type="java.lang.String" value="小白"/>
+    </bean>
+```
+
+- 参数名
+
+```java
+    <bean id="user" class="com.example.pojo.User">
+        <constructor-arg name="name" value="小鱼"/>
+    </bean>
+```
+
+总结：在配置文件加载的时候，容器中管理的对象就已经初始化了
