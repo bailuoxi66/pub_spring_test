@@ -235,3 +235,64 @@ Ok！到了现在，我们彻底不用再去程序中改动去了，要实现不
 ```
 
 总的是：applicationContext.xml
+
+# 6、依赖注入
+
+## 6.1、构造器注入
+
+前面已经讲过
+
+## 6.2、Set方式注入【重点】
+
+- 依赖注入：Set注入！
+  - 依赖：bean对象的创建依赖于容器！
+  - 注入：bean对象中的所有属性，由容器来注入！
+
+【环境搭建】
+
+1. 普通类型
+
+   ```java
+   public class Address {
+       private String address;
+   }
+   ```
+
+2. 复杂类型
+
+   ```java
+   public class Student {
+       private String name;
+       private Address address;
+       private String[] books;
+       private List<String> hobby;
+       private Map<String, String> card;
+       private Set<String> games;
+       private String wife;
+       private Properties info;
+   }
+   ```
+
+3. beans.xml
+
+   ```xml
+       <bean id="student" class="com.example.pojo.Student">
+           <!--第一种，普通注入-->
+           <property name="name" value="小白"/>
+       </bean>
+   ```
+
+4. 测试
+
+   ```java
+   public class MyTest {
+       public static void main(String[] args) {
+           ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+           Student student = (Student) context.getBean("student");
+           System.out.println(student.getName());
+       }
+   }
+   ```
+
+## 6.3、拓展注入
+
