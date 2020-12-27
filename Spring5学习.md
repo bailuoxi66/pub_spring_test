@@ -363,3 +363,42 @@ Ok！到了现在，我们彻底不用再去程序中改动去了，要实现不
 
 ## 6.3、拓展注入
 
+https://docs.spring.io/spring-framework/docs/4.3.30.RELEASE/spring-framework-reference/htmlsingle/#beans
+
+<img src="/Users/liangzhengtao/Library/Application Support/typora-user-images/image-20201227113552911.png" alt="image-20201227113552911" style="zoom:50%;" />
+
+使用：
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--p命名空间注入，可以直接注入简单属性：property-->
+    <bean id="user" class="com.example.pojo.User" p:name="小白" p:age="18"/>
+
+    <!--c命名空间注入，通过构造器注入：construct-args-->
+    <bean id="user2" class="com.example.pojo.User" c:age="18" c:name="小白白"/>
+</beans>
+```
+
+测试：
+
+```java
+    @Test
+    public void test2(){
+        ApplicationContext context = new ClassPathXmlApplicationContext("userbeans.xml");
+        User user = context.getBean("user2", User.class);
+
+        System.out.println(user);
+    }
+```
+
+注意点：p命名和c命名不能直接输入，需要导入依赖
+
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
