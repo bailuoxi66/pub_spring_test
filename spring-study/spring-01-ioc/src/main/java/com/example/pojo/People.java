@@ -1,5 +1,10 @@
 package com.example.pojo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+import javax.annotation.Resource;
+
 /**
  * @author <a href="mailto:liangzhengtao.lzt@lazada.com">liangzhengtao.lzt</a>
  * @version 1.0
@@ -7,7 +12,10 @@ package com.example.pojo;
  * @desc
  */
 public class People {
+    @Autowired
     private Cat cat;
+
+    @Autowired
     private Dog dog;
     private String name;
 

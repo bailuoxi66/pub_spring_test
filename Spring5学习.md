@@ -467,3 +467,67 @@ https://docs.spring.io/spring-framework/docs/4.3.30.RELEASE/spring-framework-ref
 - byname的时候，需要保证bean的id唯一，并且这个bean需要和自动注入的属性的set方法值一致！
 - Bytype的时候，需要保证所有bean的class唯一，并且这个bean需要和自动注入的属性的类型一致！
 
+## 7.4 使用注解实现自动装配
+
+jdk1.5支持注解，Spring2.5支持注解！
+
+要使用注解须知：
+
+1、导入约束
+
+2、配置注解的支持
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+</beans>
+```
+
+@Autowired
+
+直接在属性上面使用即可，也可以在set方式上使用！
+
+使用Autowired我们可以不用编写set方法，前提是你这个自动装载的属性在IOC（Spring）容器中存在，且符合名字byname！
+
+科普：
+
+@Nullable：字段标记了这个注解，说明该字段可以为null
+
+测试代码：
+
+```java
+    @Autowired
+    private Cat cat;
+
+    @Autowired
+    @Qualifier(value = "dog2")
+    private Dog dog;
+```
+
+如果Autowire自动装配环境复杂，可以使用Qualifier配合使用
+
+@Resource
+
+```java
+    @Resource(name = "cat1")
+    private Cat cat;
+
+    @Resource
+    private Dog dog;
+```
+
+小结：
+
+Resource和Autowired的区别：
+
+- 都可以用来自动装配，都可以放在属性字段上面
+- Autowired通过bytype实现
+- Resource默认通过byname实现，如果找不到会根据类型进行查找
