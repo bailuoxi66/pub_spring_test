@@ -402,3 +402,25 @@ https://docs.spring.io/spring-framework/docs/4.3.30.RELEASE/spring-framework-ref
 
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:c="http://www.springframework.org/schema/c"
+## 6.4、 bean的作用域
+
+<img src="/Users/liangzhengtao/Library/Application Support/typora-user-images/image-20201227114522516.png" alt="image-20201227114522516" style="zoom:50%;" />
+
+1、单例模式（Spring默认机制）
+
+```xml
+    <!--c命名空间注入，通过构造器注入：construct-args-->
+    <bean id="user2" class="com.example.pojo.User" c:age="18" c:name="小白白" scope="singleton"/>
+```
+
+2、原型模式：每次从容器中get的时候，都会产生一个新对象
+
+```xml
+    <!--c命名空间注入，通过构造器注入：construct-args-->
+    <bean id="user2" class="com.example.pojo.User" c:age="18" c:name="小白白" scope="prototype"/>
+```
+
+3、其余的request、session、application这些个只能在web开发中使用到！
+
+
+

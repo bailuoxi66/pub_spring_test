@@ -10,5 +10,5 @@
     <bean id="user" class="com.example.pojo.User" p:name="小白" p:age="18"/>
 
     <!--c命名空间注入，通过构造器注入：construct-args-->
-    <bean id="user2" class="com.example.pojo.User" c:age="18" c:name="小白白"/>
+    <bean id="user2" class="com.example.pojo.User" c:age="18" c:name="小白白" scope="prototype"/>
 </beans>
