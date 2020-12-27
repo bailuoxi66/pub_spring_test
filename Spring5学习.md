@@ -422,5 +422,48 @@ https://docs.spring.io/spring-framework/docs/4.3.30.RELEASE/spring-framework-ref
 
 3、其余的request、session、application这些个只能在web开发中使用到！
 
+# 7、Bean的自动装配
 
+- 自动装配是Spring满足bean依赖一种方式！
+- Spring会在上下文中自动寻找，并自动给bean装配属性！
+
+在Spring中有三种装配的方式
+
+1、在xml中显示的配置
+
+2、在java中显示配置
+
+3、隐式的自动装配bean【重要】
+
+## 7.1 测试
+
+测试：一个人两个动物
+
+## 7.2 ByName自动装配
+
+```java
+<!--    byName:会自动在容器的上下文中查找，和自己对象set方法后面的值对应的beanid-->
+<!--    byName:会自动在容器的上下文中查找，和自己对象类型相同的的beanid-->
+    <bean id="people" class="com.example.pojo.People" autowire="byName">
+        <property name="name" value="小白白啊"/>
+    </bean>
+```
+
+## 7.3 ByType自动装配
+
+```xml
+    <bean class="com.example.pojo.Cat"/>
+    <bean class="com.example.pojo.Dog"/>
+
+<!--    byName:会自动在容器的上下文中查找，和自己对象set方法后面的值对应的beanid-->
+    <!--    byName:会自动在容器的上下文中查找，和自己对象set方法后面的值对应的beanid-->
+    <bean id="people" class="com.example.pojo.People" autowire="byType">
+        <property name="name" value="小白白啊"/>
+    </bean>
+```
+
+小结：
+
+- byname的时候，需要保证bean的id唯一，并且这个bean需要和自动注入的属性的set方法值一致！
+- Bytype的时候，需要保证所有bean的class唯一，并且这个bean需要和自动注入的属性的类型一致！
 
