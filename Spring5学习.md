@@ -802,5 +802,8 @@ public class Client {
 
 缺点：
 
-- 一个真实的角色就会产生一个代理角色，代码量翻倍
+- 一个真实的角色就会产生一个代理角色，代码量翻倍，开发效率会变低
 
+## 10.2 加深理解
+
+<img src="/Users/liangzhengtao/Library/Application Support/typora-user-images/image-20201229013259835.png" alt="image-20201229013259835" style="zoom:50%;" />
