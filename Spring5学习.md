@@ -531,3 +531,99 @@ Resource和Autowired的区别：
 - 都可以用来自动装配，都可以放在属性字段上面
 - Autowired通过bytype实现
 - Resource默认通过byname实现，如果找不到会根据类型进行查找
+
+# 8、使用注解开发
+
+在Spring4之后，要使用注解开发，必须保证aop的包导入了
+
+使用注解需要导入context约束，增加注解的支持！
+
+```java
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+		<context:annotation-config/>
+
+</beans>
+```
+
+1、bean
+
+2、组建Component
+
+```java
+//等价于<bean id="user" class="com.example.pojo.User"/>
+//Component 组建
+
+@Component
+public class User {
+    public String name="小鱼儿";
+}
+```
+
+- 在类上面，说明这个类被Spring管理了，就是bean！！！
+
+3、属性注入
+
+```java
+//等价于<bean id="user" class="com.example.pojo.User"/>
+//Component 组建
+
+@Component
+public class User {
+
+    public String name;
+    //相当于 <property name="name" value="xiaoyuer"/>
+    @Value("xiaoyuer")
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+```
+
+4、衍生注解
+
+@Component有几个衍生注解，我们在web开发中，会按照mvc三层架构分层！！！
+
+- dao【@Repository】
+
+- Service【@Service】
+
+- controller【@Controller】
+
+  这四个注解功能都是一样的，都是代表将某个类注册到Spring中，装配Bean
+
+5、自动装配
+
+```java
+@Autowired:自动装配，通过类型
+  - 如果Autowired不能唯一自动装配上属性，则需要通过@Qualifier（value=“***”）
+@Nullable：字段标记了这个注解，说明这个字段可以为null
+@Resource：自动装配通过名字
+```
+
+6、小结
+
+xml与注解：
+
+- xml更加万能，适用于任何场合！维护简单方便
+- 注解不是自己类使用不了，维护相对复杂！
+
+xml与注解最佳实践
+
+- xml用来管理bean；
+- 注解只负责完成属性的注入；
+- 我们在使用的过程中，只需要注意一个问题：必须让注解生效，就需要开启注解的支持
+
+```xml
+<!--    指定要扫描的包，这个包下的注解就会生效-->
+    <context:component-scan base-package="com.example"/>
+    <context:annotation-config/>
+```
+
