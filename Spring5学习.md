@@ -627,3 +627,76 @@ xml与注解最佳实践
     <context:annotation-config/>
 ```
 
+# 9、使用java的方式配置Srping
+
+我们现在要完全不使用Spring的xml配置了，全权交给java来做了！
+
+JavaConfig是Spring的一个子项目，在Spring4之后，它成为了一个核心
+
+<img src="/Users/liangzhengtao/Library/Application Support/typora-user-images/image-20201228205623163.png" alt="image-20201228205623163" style="zoom:50%;" />
+
+配置文件：
+
+```java
+//这个也会被Spring容器托管，注册到容器中，因为他本来就是一个@Component
+//也代表这是一个配置类，就和我们之前看的beans.xml一样
+@Configuration
+@ComponentScan("com.example.pojo")
+@Import(BaiConfig2.class)
+public class BaiConfig {
+
+    //注册一个bean，就相当于我们之前写的一个bean标签
+    //这个方法的名字，就相当于bean标签中的id属性
+    //这个方法的返回值，就相当于bean标签中的class属性
+    @Bean
+    public User getUser(){
+        return new User();   //就是返回注入到bean的对象！！！
+    }
+}
+```
+
+实体类：
+
+```java
+//等价于<bean id="user" class="com.example.pojo.User"/>
+//Component 组建
+
+//这里这个注解的意思，就是说明这个类被Spring接管了，注册到了容器中
+@Component
+public class User {
+
+    public String name;
+
+    public String getName() {
+        return name;
+    }
+
+    //属性注入值
+    @Value("小白白")
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+}
+```
+
+测试类
+
+```java
+    @Test
+    public void test1(){
+        //如果完全使用了配置类方式去做，我们就只能通过AnnotationConfig上下文来获取容器，通过配置类的class对象进行加载
+        ApplicationContext  context = new AnnotationConfigApplicationContext(BaiConfig.class);
+        User getUser = (User) context.getBean("getUser");
+
+        System.out.println(getUser.getName());
+    }
+```
+
+这种纯java的方式，在Spring中随处可见

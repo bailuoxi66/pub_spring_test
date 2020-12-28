@@ -13,14 +13,26 @@ import org.springframework.stereotype.Component;
 //等价于<bean id="user" class="com.example.pojo.User"/>
 //Component 组建
 
+//这里这个注解的意思，就是说明这个类被Spring接管了，注册到了容器中
 @Component
-@Scope("prototype")
 public class User {
 
     public String name;
-    //相当于 <property name="name" value="xiaoyuer"/>
-    @Value("xiaoyuer")
+
+    public String getName() {
+        return name;
+    }
+
+    //属性注入值
+    @Value("小白白")
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

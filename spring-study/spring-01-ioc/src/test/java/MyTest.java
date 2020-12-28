@@ -1,6 +1,8 @@
+import com.example.config.BaiConfig;
 import com.example.pojo.User;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -12,9 +14,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class MyTest {
     @Test
     public void test1(){
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        User user = (User) context.getBean("user");
+        //如果完全使用了配置类方式去做，我们就只能通过AnnotationConfig上下文来获取容器，通过配置类的class对象进行加载
+        ApplicationContext  context = new AnnotationConfigApplicationContext(BaiConfig.class);
+        User getUser = (User) context.getBean("getUser");
 
-        System.out.println(user.name);    //这里取出来，Component成功了
+        System.out.println(getUser.getName());
     }
 }
