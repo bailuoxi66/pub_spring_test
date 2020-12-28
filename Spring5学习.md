@@ -700,3 +700,107 @@ public class User {
 ```
 
 这种纯java的方式，在Spring中随处可见
+
+# 10、代理模式
+
+中介：（黄牛、卖房子），帮一些人做一些事情
+
+为什么要学习代理模式？因为这是SpringAOP的底层！【SpringAOP和SpringMVC】
+
+代理模式的分类：
+
+- 静态代理
+- 动态代理
+
+<img src="/Users/liangzhengtao/Library/Application Support/typora-user-images/image-20201229001432473.png" alt="image-20201229001432473" style="zoom:50%;" />
+
+## 10.1 静态代理
+
+角色分析：
+
+- 抽象角色：一般会使用接口或者抽象类来解决
+- 真实角色：被代理的角色
+- 代理角色：代理真实角色，代理真实角色后，我们一般会做一些附属操作
+- 客户：访问代理对象的人
+
+接口/抽象
+
+```java
+public interface Rent {
+    public void rent();
+}
+```
+
+真实人：
+
+```java
+public class Host implements Rent{
+    public void rent() {
+        System.out.println("房东要出租房子！");
+    }
+}
+```
+
+代理人：
+
+```java
+public class Proxy implements Rent{
+    Host host;
+
+    public Proxy() {
+    }
+
+    public Proxy(Host host) {
+        seeHouse();
+        this.host = host;
+        hetong();
+        fare();
+    }
+
+    public void rent() {
+        host.rent();
+    }
+
+    //看房
+    public void seeHouse(){
+        System.out.println("中介带看房子！");
+    }
+
+    //收中介费
+    public void fare(){
+        System.out.println("收中介费！");
+    }
+
+    //签合同
+    public void hetong(){
+        System.out.println("签租赁合同！");
+    }
+}
+```
+
+真是用户：
+
+```java
+public class Client {
+    public static void main(String[] args) {
+        //房东要租房子
+        Host host = new Host();
+        //代理，中介帮房东找人，但是呢？代理角色一般会有一些附加操作
+        Proxy proxy = new Proxy(host);
+
+        //用户不用面对房东，直接找中介租房子
+        proxy.rent();
+    }
+}
+```
+
+代理模式的好处：
+
+- 可以使真实角色的操作更加纯粹，不用关注一些公共的业务
+- 公共就交给了代理，实现了业务分工
+- 公共业务发生扩张的时候，方便集中管理
+
+缺点：
+
+- 一个真实的角色就会产生一个代理角色，代码量翻倍
+
