@@ -828,3 +828,33 @@ public class Client {
 - 公共业务发生扩展的时候，方便集中管理
 - 一个动态代理类代理的是一个接口，一般就是对应一类业务
 - 一个动态代理可以代理多个类，只需要实现一个接口即可
+
+# 11、AOP
+
+## 11.1 什么是AOP
+
+<img src="/Users/luoyu/Library/Application Support/typora-user-images/image-20210106131055904.png" alt="image-20210106131055904" style="zoom:50%;" />
+
+## 11.2 AOP在Spring中的作用
+
+![image-20210106131319824](/Users/luoyu/Library/Application Support/typora-user-images/image-20210106131319824.png)
+
+![image-20210106131535543](/Users/luoyu/Library/Application Support/typora-user-images/image-20210106131535543.png)
+
+## 11.3 使用Spring实现AOP
+
+【重点】使用AOP，需要先导入一个依赖
+
+```xml
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.4</version>
+            <scope>runtime</scope>
+        </dependency>
+
+```
+
+方式一：使用Spring的API接口
+
