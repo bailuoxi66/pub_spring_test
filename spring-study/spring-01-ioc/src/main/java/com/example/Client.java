@@ -9,6 +9,6 @@ public class Client {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         //动态代理代理的是接口
         UserService userService = (UserService) context.getBean("userService");
-        userService.add();
+        userService.update();
     }
 }
