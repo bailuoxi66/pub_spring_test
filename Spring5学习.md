@@ -856,5 +856,7 @@ public class Client {
 
 ```
 
-方式一：使用Spring的API接口
+方式一：使用Spring的API接口【主要是SpringAPI接口实现】
+
+方式二：使用自定义类实现【主要是切面定义】
 
